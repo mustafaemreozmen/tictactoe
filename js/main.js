@@ -12,8 +12,47 @@ const winConditions = [
     [gameBoard[0], gameBoard[4], gameBoard[8]],
     [gameBoard[2], gameBoard[4], gameBoard[6]]
 ];
-let gameStatus = false;
+
 let turn = 'X';
+let gameStatus = false;
+let clicksOf = {
+    'X': [],
+    'O': []
+}
+
+const gameStatusChanger = () => {
+    if (gameStatus) {
+        gameButton.className = 'not-started';
+        gameButton.innerHTML = 'start game';
+        resetGame();
+    }
+    else {
+        gameButton.className = 'started';
+        gameButton.innerHTML = 'end game';
+    }
+    gameStatus = !gameStatus;
+}
+
+const checkWinner = (clicks) => {
+    return winConditions.filter((condition) => {
+        return condition.sort().toString() == clicks.sort().toString()
+    }).length;
+}
+
+const boardCellClick = function (cell) {
+    if (gameStatus && !isNaN(cell.innerText)) {
+        clicksOf[turn].push(cell.innerText);
+        cell.innerText = turn;
+        debugger;
+        if(checkWinner(clicksOf[turn]))
+            alert(turn + " wins!")
+        turn = turn == 'X' ? 'O' : 'X';
+    }
+}
+
+const resetGame = () => {
+    window.location.reload();
+}
 
 window.addEventListener('load', (e) => {
     let length = gameBoard.length;
@@ -21,44 +60,8 @@ window.addEventListener('load', (e) => {
         tdArray[i].innerText = gameBoard[i];
         tdArray[i].onclick = (e) => boardCellClick(tdArray[i]);
     }
-
-    // const { rows } = gameTable;
-    // for(let row of rows){
-    //     for(let cell of row.cells){
-    //         cell.innerText = '';
-    //         
-    //     }
-    // }
-})
-
-const gameStatusChanger = () => {
-    if(gameStatus){
-        gameButton.className = 'not-started';
-        gameButton.innerHTML = 'start game';
-        resetGame();
-    }
-    else{
-        gameButton.className = 'started';
-        gameButton.innerHTML = 'end game';
-    }
-    gameStatus = !gameStatus;
-}
-
-const checkWinner = () => {
-    //TO-DO
-}
-
-const boardCellClick = function(cell) {
-    if(gameStatus && !isNaN(cell.innerText)){
-        cell.innerText = turn;
-        turn = turn == 'X' ? 'O' : 'X';
-    }
-}
-
-gameButton.addEventListener('click', (e) => { 
-    gameStatusChanger();
 });
 
-const resetGame = () => {
-    window.location.reload();
-}
+gameButton.addEventListener('click', (e) => {
+    gameStatusChanger();
+});
