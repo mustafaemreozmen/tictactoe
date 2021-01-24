@@ -1,0 +1,68 @@
+* {
+    user-select: none;
+    margin: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 10px;
+    margin: 0px auto;
+}
+
+th, td {
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    border: 1px solid #000000;
+    font-size: 2em;
+    font-weight: 400;
+}
+
+td:hover{
+    cursor:grab;
+}
+
+main {
+    margin: 0px auto;
+    width: 50%;
+}
+
+.game-control {
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+button {
+    background-color: snow;
+    font-size: 1.5em;
+    border: 1px solid gray;
+    color: white;
+    padding: 5px;
+}
+
+#game-button {
+    min-width: 30%;
+    /* margin: 0px auto; */
+}
+.started {
+    background-color: crimson;
+}
+
+.not-started {
+    background-color: greenyellow;
+}
+
+
+#winner {
+    text-align: center;
+    display: inline;
+
+}
